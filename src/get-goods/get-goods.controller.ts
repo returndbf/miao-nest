@@ -1,18 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { GetGoodsService } from './get-goods.service';
 import { CreateGetGoodDto } from './dto/create-get-good.dto';
 import { UpdateGetGoodDto } from './dto/update-get-good.dto';
+import { BaseController } from "../BaseController";
 
-@Controller('get-goods')
-export class GetGoodsController {
-  constructor(private readonly getGoodsService: GetGoodsService) {}
+@Controller('getGoods')
+export class GetGoodsController extends BaseController {
+  constructor(private readonly getGoodsService: GetGoodsService) {
+    super();
+  }
 
   @Post()
   create(@Body() createGetGoodDto: CreateGetGoodDto) {
     return this.getGoodsService.create(createGetGoodDto);
   }
 
-  @Get()
+  @Get('queryGetGoods')
   findAll() {
     return this.getGoodsService.findAll();
   }
